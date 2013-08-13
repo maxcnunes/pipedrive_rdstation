@@ -6,7 +6,9 @@ Gem::Specification.new do |s|
   s.description = "A simple gem for import Person data from RD Station to  Pipedrive"
   s.authors     = ["Max Claus Nunes"]
   s.email       = 'maxcnunes@gmail.com'
-  s.files       = ["lib/pipedrive_rdstation.rb"]
-  #s.homepage    = 'http://rubygems.org/gems/pipedrive_rdstation'
-  s.license       = 'MIT'
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.homepage    = ''
+  s.license     = 'MIT'
 end
