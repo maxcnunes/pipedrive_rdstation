@@ -1,36 +1,34 @@
 require 'spec_helper'
 
 describe Pipedrive do
+ 
   describe ".authenticate" do
-    # it "authenticates valid user by email and password" do
-    #   app_key = Pipedrive.authenticate('test@test.com', '****')
-    #   app_key.should_not be_nil
-    # end
-
-    it "gives back this user's api key" do
-      email, password = "test@test.com", "secret"
-      body = load_fixture("valid_authorizations.json")
-
-      stub_request(:post, "http://api.pipedrive.com/v1/authorizations").
-         with(:body => {"email"=> email, "password"=> password},
-              :headers => {'Accept'=>'application/json',
-                'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby.Pipedrive.Api'}).
-         to_return(:status => 200, :body => body, :headers => {
-          "server" => "nginx/1.2.4",
-          "date" => "Fri, 01 Mar 2013 13:34:23 GMT",
-          "content-type" => "application/json",
-          "content-length" => "1164",
-          "connection" => "keep-alive",
-          "access-control-allow-origin" => "*"
-        })
-
-
-
-      app_key = Pipedrive.authenticate(email, password)
-      app_key.should_not be_nil
-      app_key.should_not be_empty
+    def do_authorization_request(email, password, body_response, success=true)
+      stub_request(:post, Pipedrive::Base.url_request('authorizations')).
+        with(body: { email: email, password: password }, headers: Pipedrive::Base::HEADERS_REQUEST).
+        to_return(status: success ? 200 : 400, body: body_response, headers: HEADERS_RESPONSE)
     end
 
+    context "when is a valid user" do
+      it "gives back the user's api key" do
+        email, password, valid_app_key = "test@test.com", "secret", "secrete_token_api_9809897898787899797979"
+        do_authorization_request(email, password, load_fixture("valid_authorizations.json"))
+        
+        # asserts
+        app_key = Pipedrive.authenticate(email, password)
+        app_key.should eql(valid_app_key)
+      end
+    end
+    
+    context "when is not a valid user" do
+      it "raise an execption with the error description" do
+        email, password = "not_valid_test@test.com", "not_valid_secret"
+        do_authorization_request(email, password, load_fixture("not_valid_authorizations.json"), false)
+        
+        # asserts
+        lambda { Pipedrive.authenticate(email, password) }.should raise_error
+      end
+    end
 
   end
 end
