@@ -1,7 +1,6 @@
 require 'pipedrive/base'
+require 'pipedrive/authorization'
 
 module Pipedrive
-  def self.authenticate(email, password)
-    Base.authenticate(email, password)
-  end
+  Base.setup_httparty
 end
