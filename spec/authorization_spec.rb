@@ -3,12 +3,9 @@ require 'spec_helper'
 describe Pipedrive::Authorization do
  
   describe "#authenticate" do
-    def url_request(action_url)
-      "http://api.pipedrive.com/v1#{action_url}"
-    end
     
     def do_authorization_request(email, password, body_response, success=true)
-      stub_request(:post, url_request('/authorizations')).
+      stub_request(:post, url_request(Pipedrive::Authorization::URL_ACTIONS[:authorizatons])).
         with(body: { email: email, password: password }, headers: Pipedrive::Base::HEADERS_REQUEST).
         to_return(status: success ? 200 : 400, body: body_response, headers: HEADERS_RESPONSE)
     end

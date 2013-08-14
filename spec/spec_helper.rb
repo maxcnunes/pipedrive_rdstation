@@ -25,3 +25,9 @@ HEADERS_RESPONSE = {
   "connection" => "keep-alive",
   "access-control-allow-origin" => "*"
   }
+
+def url_request(action_url, api_key=nil)
+  url = "http://api.pipedrive.com/v1#{action_url}"
+  url = "#{url}?api_token=#{api_key}" unless api_key.nil? 
+  url
+end

@@ -1,13 +1,13 @@
 module Pipedrive
   class Authorization < Base
-    URL_ACTION = '/authorizations'
+    URL_ACTIONS = { authorizatons: '/authorizations' }
     
     def initialize(email, password)      
       @email, @password = email, password
     end
     
     def authenticate()
-      response = post(URL_ACTION, { body: { email: @email, password: @password } })
+      response = post(URL_ACTIONS[:authorizatons], { body: { email: @email, password: @password } })
       api_token_from_response(response)
     end
     
