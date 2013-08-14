@@ -6,3 +6,13 @@ Pipedrive RD Station
 [![Code Climate](https://codeclimate.com/github/maxcnunes/pipedrive_rdstation.png)](https://codeclimate.com/github/maxcnunes/pipedrive_rdstation)
 
 A simple gem for import Person data from RD Station to  Pipedrive
+
+### Person Model Mapping
+ RD Station |  Pipedrive
+- name		  ~> name (string)
+- last_name	~> (join with name)
+- email		  ~> email (array)
+- company	  ~> org_id (number)
+- job_title	~> job_title (Person Field - varchar)
+- phone		  ~> phone (array)
+- website	  ~> website (Person Field - varchar)

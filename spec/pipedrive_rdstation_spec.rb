@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Pipedrive do
   context ".setup_httparty" do
-    it "default headers is configured for Pipedrive API standards" do
+    it "configures default headers for Pipedrive API standards" do
       Pipedrive::Base.headers.should_not be_nil
     end
     

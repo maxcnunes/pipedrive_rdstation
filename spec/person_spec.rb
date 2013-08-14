@@ -6,7 +6,7 @@ describe Pipedrive::Person do
 
     
     def do_create_request(attributes, body_response, success=true)
-      stub_request(:post, url_request(Pipedrive::Person::URL_ACTIONS[:create], @app_key)).
+      stub_request(:post, url_request(Pipedrive::Person::URL_ACTIONS[:default], @app_key)).
         with(body: attributes, headers: Pipedrive::Base::HEADERS_REQUEST).
         to_return(status: success ? 200 : 400, body: body_response, headers: HEADERS_RESPONSE)
     end

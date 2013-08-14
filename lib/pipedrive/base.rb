@@ -4,7 +4,6 @@ require 'httparty'
 module Pipedrive
   class Base
     include HTTParty
-    # attr_accessor :api_key
     base_uri "http://api.pipedrive.com/v1"
     
     HEADERS_REQUEST = {
@@ -13,15 +12,20 @@ module Pipedrive
       "Content-Type"  => "application/x-www-form-urlencoded"
     }
     
-    def self.setup_httparty
-      headers HEADERS_REQUEST
-    end
-
     def initialize(api_key=nil)
       setup_api_key(api_key)
     end
     
+    def self.setup_httparty
+      headers HEADERS_REQUEST
+    end
+    
     protected
+    def get(url)
+      response = self.class.get(url)
+      process_result(response)
+    end
+    
     def post(url, opts={})
       response = self.class.post(url, opts)
       process_result(response)
