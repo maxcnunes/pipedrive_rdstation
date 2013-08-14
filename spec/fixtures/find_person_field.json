@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "data": {
+    "id": 9049,
+    "key": "819dea5b6358897ed5bbc8b85d1defb14fabcc8b",
+    "name": "my_new_field",
+    "order_nr": 12,
+    "field_type": "varchar",
+    "active_flag": true,
+    "edit_flag": true,
+    "index_visible_flag": true,
+    "details_visible_flag": true,
+    "add_visible_flag": true,
+    "bulk_edit_allowed": true
+  }
+}
