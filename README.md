@@ -22,7 +22,7 @@ bundle
 
 ### Usage Examples
 
-The APP_KEY used in the examples is a token provided by [Pipedrive API](https://developers.pipedrive.com/v1). If you don't you know your APP_KEY in can get it in Pipedrive user settings page or you can also get it using this gem:
+The APP_KEY used in the examples is a token provided by [Pipedrive API](https://developers.pipedrive.com/v1). If you don't you know yours, then you can get it in Pipedrive user settings page or you can also get it using this gem:
 ```ruby
 APP_KEY = Pipedrive::Authorization.new("your_email", "your_password").authenticate
 ```
